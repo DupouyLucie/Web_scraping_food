@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from database import DatabaseManager
+from database import Database
 
 """
 on doit extraire le nom, les ingrédients le nutriscore.
@@ -37,7 +37,7 @@ def scraper(url):
     return {"nom": nom_produit, "nutriscore": nutriscore, "ingredients": ingredients }
 
 # On exporte les données sur le fichier SQL
-db = DatabaseManager("data/database.db")  # ouvre la base
+db = Database("data/database.db")  # ouvre la base
 product = scraper(URL) # On récupère toutes les infos
 db.insert_produit(nom=product["nom"], nutriscore=product["nutriscore"], ingredients=product["ingredients"]
 )
@@ -49,79 +49,4 @@ db.close()  # fermeture propre
 # if __name__ == "__main__":
 #     product = scraper(URL)
 #     print(product)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# #test
-
-# url_prod="https://world.openfoodfacts.org/product/6111035000430/"
-# rep=requests.get(url)
-# if response.status_code != 200:
-#      print("Erreur :", response.status_code)
-# soup = BeautifulSoup(response.text, "html.parser")
-# nom=soup.find("h1", property="food:name")
-# ingredient=soup.find("div", property='content panel_content expand-for-large active')
-# nutriscore=soup.find("h4", property="Nutri-Score")
-# print(nom)
-# print(ingredient)
-# print(nutriscore)
-
-# # url = "https://world.openfoodfacts.org/"
-# # response = requests.get(url)
-# # html = response.text
-
-# # if response.status_code != 200:
-# #     print("Erreur :", response.status_code)
-
-# # print(type(html))
-# # soup = BeautifulSoup(html, "html.parser")
-# # type(soup)
-
-# # livre = soup.find("v", class_="viewport")
-# # print(livre)
-# # #print(html[:2000]) 
-
-
-# # Test 
-
-# # url_2 = "https://world.openfoodfacts.org/product/737628064502/coca-cola"
-# # response = requests.get(url_2)
-# # html = response.text
-# # soup = BeautifulSoup(response.text, "html.parser")
-# # nom=soup.find("h1", property="food:name")
-# # ingredient=soup.find("  ")
-# # # print(nom)
-# # print(html[:2000]) 
 

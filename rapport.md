@@ -43,4 +43,73 @@ d'où
 Ensuite on essaie de ranger cette donnée dans la database :
 on passe sur le fichier python database:
 il faut creer la table, les colonnes et creer une fonction qui ajoute,à partir du dictionnaire renvoyé par le programme scraper, les données sur la table :
+le programme est annoté :
+''' python
+import sqlite3            # pour travailler avec SQLite # pour enregistrer la date du scraping
+
+class DatabaseManager:
+    def __init__(self, db_path="database.db"):
+        # Connexion à la base SQLite (une seule fois)
+        self.conn = sqlite3.connect(db_path)
+        self.cursor = self.conn.cursor()
+        # On crée la table si elle n'existait pas avant
+        self.creer_table()
+
+    # database.py
+    def recup_prod(self):
+        self.cursor.execute("SELECT * FROM produits") # avec self.cursor.execute : on parle en SQL
+        return self.cursor.fetchall()
+
+
+    def creer_table(self):
+        # on crée la table ( 1ère utilisation avec les colonnes nom, nutri-score, ingrédients, date)
+        
+        self.cursor.execute("""
+        CREATE TABLE IF NOT EXISTS produits (
+            nom TEXT NOT NULL,
+            nutriscore TEXT,
+            ingredients TEXT
+        )
+        """)
+
+        self.conn.commit()  # on sauvegarde la création de la table
+
+    def insert_produit(self, nom, nutriscore, ingredients):
+        # Insertion immédiate d'un produit
+        try:
+            self.cursor.execute("""
+                INSERT INTO produits (
+                     nom, nutriscore, ingredients
+                ) VALUES (?, ?, ?)
+            """, (
+                nom,                        
+                nutriscore,                
+                ingredients))                 
+            self.conn.commit()  # on sauvegarde l'ajout du noveau produit
+        except sqlite3.IntegrityError:
+            # pour éviter les doublons
+            pass
+
+    def close(self):
+        #Fermeture propre de la base
+        self.conn.close()
+'''
+
+On a notre classe crée, il faut maintenant revenir dans le fichier scraper pour utiliser ces nouvelles fonctions :
+on rajoute :
+ 
+
+
+from database import Database
+'''On exporte les données sur le fichier SQL'''
+db = Database("data/database.db")  # ouvre la base
+product = scraper(URL) # On récupère toutes les infos
+db.insert_produit(nom=product["nom"], nutriscore=product["nutriscore"], ingredients=product["ingredients"]
+)
+print("nouvelle ligne: " , db.recup_prod())
+db.close()  # fermeture propre
+
+
+on a maintenant, dans notre dossier 
+![alt text](image-3.png)
 

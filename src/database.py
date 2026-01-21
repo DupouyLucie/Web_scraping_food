@@ -1,6 +1,6 @@
 import sqlite3            # pour travailler avec SQLite # pour enregistrer la date du scraping
 
-class DatabaseManager:
+class Database:
     def __init__(self, db_path="database.db"):
         # Connexion à la base SQLite (une seule fois)
         self.conn = sqlite3.connect(db_path)
