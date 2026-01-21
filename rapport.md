@@ -113,3 +113,16 @@ db.close()  # fermeture propre
 on a maintenant, dans notre dossier 
 ![alt text](image-3.png)
 
+
+
+
+Maintenant il faut réusir à ajouter plusieurs produits
+On ne part plus de la page d'un produit mais depuis la page d'accueil 
+
+On remarque l'url de la page d'un produit :
+![alt text](image-4.png)
+
+ce qui nous interesse : 
+
+<a href="https://world.openfoodfacts.org/product/6111242100992/perly" class="list_product_a" title="Perly – 100&nbsp;g">
+

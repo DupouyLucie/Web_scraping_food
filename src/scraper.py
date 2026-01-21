@@ -14,12 +14,17 @@ il faut aller voir la page de chaque produit
 
 scraper = outil ou programme qui visite des pages web, lis le HTML,extrait des informations
 """
+
+#URL de produits ( premiers tests)
 #EAU
 #URL = "https://world.openfoodfacts.org/product/6111035002175/sidi-ali"
 #MAYO
 #URL="https://world.openfoodfacts.org/product/6111184004129/mayonnaise-original-recipe-star"
 #princes
-URL="https://world.openfoodfacts.org/product/7622210449283/prince-gout-chocolat-lu"
+#URL="https://world.openfoodfacts.org/product/7622210449283/prince-gout-chocolat-lu"
+
+#URL de la page d'acceuil:
+URL=https://world.openfoodfacts.org/
 
 def scraper(url):
     response = requests.get(url)   # Python va sur le site, récupère la page HTML, stocke dans response
