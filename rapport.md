@@ -126,3 +126,6 @@ ce qui nous interesse :
 
 <a href="https://world.openfoodfacts.org/product/6111242100992/perly" class="list_product_a" title="Perly – 100&nbsp;g">
 
+donc les liens sont dans des balsises  <a href="">, il faut récupérer tous les liens de produits, on peut donc vérifier qu'il y a bien la partie /product/ dans le lien ( il y a d'autres liens sur la page)
+
+j'écris une fonction pour récupérer 5 produits
