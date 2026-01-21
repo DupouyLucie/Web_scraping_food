@@ -144,3 +144,4 @@ ca marche ! on peut maintenant passer à l'analyse des données
 
 
 Déjà je commence par récupérer toutes les données : je créee une fonction get_all_produits qui me renvoie une liste de tuples, 
+on utilise la librairy panda pour faire des statistiques 
