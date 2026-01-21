@@ -42,6 +42,10 @@ class Database:
         except sqlite3.IntegrityError:
             # pour éviter les doublons
             pass
+    
+    def get_all_produits(self):
+        self.cursor.execute(""" SELECT * FROM produits""")
+        return self.cursor.fetchall()
 
     def close(self):
         #Fermeture propre de la base

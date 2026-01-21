@@ -140,3 +140,7 @@ En fait, on récupère sous format Java Script, il faut passer par Selenium:
 
 On écrit une fonction qui récupère une liste de lien, une fonction qui ajoute pour chaque element de la liste le nouveau produit . 
 ca marche ! on peut maintenant passer à l'analyse des données
+![alt text](image-6.png)
+
+
+Déjà je commence par récupérer toutes les données : je créee une fonction get_all_produits qui me renvoie une liste de tuples, 
