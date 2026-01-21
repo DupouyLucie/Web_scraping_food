@@ -51,12 +51,12 @@ def scraper_produit(url):
 
     ingr = soup.find("h3", id="panel_group_ingredients").find_next("div", class_="panel_text") # pareil, necessaire car pas assez précis juste "ingrédients"
     ingredients = ingr.get_text(" ", strip=True) if ingr else "Sans ingrédients"
-    print ("nom", nom_produit, "nutriscore:", nutriscore, "ingredients", ingredients )
+    #print ("nom", nom_produit, "nutriscore:", nutriscore, "ingredients", ingredients )
 
     return {"nom": nom_produit, "nutriscore": nutriscore, "ingredients": ingredients }
 
 
-def scraper_lien(n=5):
+def scraper_lien():
     # "donne une liste de lien"
     # response = requests.get(URL) #ici il faut que ce soit l'URL du site
     # if response.status_code != 200:
@@ -79,19 +79,23 @@ def scraper_lien(n=5):
     #     if len(liens) == n:
     #         break 
     # return liens
-    driver = webdriver.Chrome()   # ouvre Chrome
-    driver.get("https://world.openfoodfacts.org/")  # page d'accueil
-    time.sleep(5)  # attendre que le JS charge
-    produits = driver.find_elements(By.CLASS_NAME, "list_product_a")
-    liens = []
-    for p in produits:
-        lien = p.get_attribute("href")
-        liens.append(lien)
+    liens=[]
+    for i in range(1,5):
+        print(i)
+        URL="https://world.openfoodfacts.org/"+str(i)
+        driver = webdriver.Chrome()   # ouvre Chrome
+        driver.get(URL)  # page d'accueil
+        time.sleep(5)  # attendre que le JS charge
+        produits = driver.find_elements(By.CLASS_NAME, "list_product_a")
+
+        for p in produits:
+            lien = p.get_attribute("href")
+            liens.append(lien)
     return liens
 
 
-def boucle_scrap(n):
-    liste_liens=scraper_lien(n)
+def boucle_scrap():
+    liste_liens=scraper_lien()
     for lien in liste_liens:
         exporter_database(lien)
 
@@ -106,7 +110,7 @@ def exporter_database(url):
 
 
 if __name__ == "__main__":
-    boucle_scrap(5)
+    boucle_scrap()
 
 
 

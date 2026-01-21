@@ -128,4 +128,15 @@ ce qui nous interesse :
 
 donc les liens sont dans des balsises  <a href="">, il faut récupérer tous les liens de produits, on peut donc vérifier qu'il y a bien la partie /product/ dans le lien ( il y a d'autres liens sur la page)
 
-j'écris une fonction pour récupérer 5 produits
+En fait, on récupère sous format Java Script, il faut passer par Selenium:
+        driver = webdriver.Chrome()   # ouvre Chrome
+        driver.get(URL)  # page d'accueil
+        time.sleep(5)  # attendre que le JS charge
+        produits = driver.find_elements(By.CLASS_NAME, "list_product_a")
+
+        for p in produits:
+            lien = p.get_attribute("href")
+            liens.append(lien)
+
+On écrit une fonction qui récupère une liste de lien, une fonction qui ajoute pour chaque element de la liste le nouveau produit . 
+ca marche ! on peut maintenant passer à l'analyse des données
